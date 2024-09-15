@@ -9,9 +9,7 @@ const swaggerDocument = require("./swagger.json");
 app.use(express.json());
 app.use("/student", student_router);
 
-let atlasUrl =
-  "mongodb+srv://Gautama:Gaunik%401234@cluster1.txuuzz9.mongodb.net/attendance_project?retryWrites=true&w=majority";
-mongoose.connect(atlasUrl);
+let atlasUrl ="";
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error: "));
 db.once("open", function () {
