@@ -48,8 +48,8 @@ const updateStudentById = async (id, studentData) => {
     if (!student) {
       throw new Error("Student not found");
     }
-    const { createdAt, __v, ...rest } = student;
-    return rest;
+    // const { createdAt, __v, ...rest } = student;
+    return student;
   } catch (error) {
     throw new Error(`Error updating student: ${error.message}`);
   }
