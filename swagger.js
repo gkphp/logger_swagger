@@ -31,7 +31,7 @@ const doc = {
     },
     servers: [
       {
-        url: "http://localhost:8080", // Base URL of the API
+        url: "https://logger-swagger-2.onrender.com/", // Base URL of the API
       },
     ],
     components: {
