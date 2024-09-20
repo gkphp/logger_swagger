@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: Student Application
+  version: 1.0.0
+  description: API for managing students
+servers:
+  - url: http://localhost:8080
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: First name of the student
+          example: John
+        lastName:
+          type: string
+          description: Last name of the student
+          example: Doe
+        email:
+          type: string
+          description: Email address of the student
+          example: johndoe@example.com
+        dateOfBirth:
+          type: string
+          format: date
+          description: Student's date of birth
+          example: '1990-01-01'
+      required:
+        - firstName
+        - lastName
+        - email
+        - dateOfBirth
+paths:
+  /student:
+    post:
+      summary: Create a new student
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+              required:
+                - firstName
+                - lastName
+                - email
+                - dateOfBirth
+      responses:
+        '201':
+          description: Student created successfully
+        '400':
+          description: Bad request
+    get:
+      summary: Get all students
+      tags:
+        - Students
+      responses:
+        '200':
+          description: List of all students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+  /student/{id}:
+    get:
+      summary: Get a student by ID
+      tags:
+        - Students
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The student ID
+      responses:
+        '200':
+          description: A student object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found
+    put:
+      summary: Update a student by ID
+      tags:
+        - Students
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The student ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Student updated successfully
+        '400':
+          description: Bad request
+        '404':
+          description: Student not found
+    delete:
+      summary: Delete a student by ID
+      tags:
+        - Students
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The student ID
+      responses:
+        '200':
+          description: Student deleted successfully
+        '404':
+          description: Student not found
+tags: []

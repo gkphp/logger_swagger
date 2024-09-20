@@ -20,8 +20,8 @@ const studentSchema = new Schema({
   dateOfBirth: {
     type: Date,
     required: true,
-  }
-});
+  },
+}, {timestamps: true});
 
 const Student = mongoose.model("Student", studentSchema);
 
