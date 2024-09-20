@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(cors());
 app.use("/student", student_router);
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URL);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error: "));
