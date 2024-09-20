@@ -24,14 +24,8 @@ const getStudentById = async (email) => {
       throw new Error("Student not found");
     }
     // const { createdAt, __v, ...rest } = student;
-    const obj = {
-      firstName: student.firstName,
-      lastName: student.lastName,
-      email: student.email,
-      dateOfBirth: student.dateOfBirth,
-      updateAt: student.updatedAt,
-    };
-    return obj;
+    
+    return student;
   } catch (error) {
     throw new Error(`Error fetching student: ${error.message}`);
   }
