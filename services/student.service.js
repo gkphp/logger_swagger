@@ -17,12 +17,14 @@ const getAllStudents = async () => {
   }
 };
 
-const getStudentById = async (id) => {
+const getStudentById = async (email) => {
   try {
-    const student = await Student.findById(id);
+    const student = await Student.findOne({ email: email });
     if (!student) {
       throw new Error("Student not found");
     }
+    // const { createdAt, __v, ...rest } = student;
+    
     return student;
   } catch (error) {
     throw new Error(`Error fetching student: ${error.message}`);
@@ -34,9 +36,13 @@ const updateStudentById = async (id, studentData) => {
     const student = await Student.findByIdAndUpdate(id, studentData, {
       new: true,
     });
+    // const student = await Student.findOneAndUpdate({email: id}, studentData, {
+    //   new: true,
+    // });
     if (!student) {
       throw new Error("Student not found");
     }
+    // const { createdAt, __v, ...rest } = student;
     return student;
   } catch (error) {
     throw new Error(`Error updating student: ${error.message}`);
@@ -46,6 +52,7 @@ const updateStudentById = async (id, studentData) => {
 const deleteStudentById = async (id) => {
   try {
     const student = await Student.findByIdAndDelete(id);
+    // const student = await Student.findOneAndDelete({email:id});
     if (!student) {
       throw new Error("Student not found");
     }
